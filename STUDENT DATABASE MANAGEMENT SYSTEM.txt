@@ -1,0 +1,284 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_STUDENTS 10
+
+typedef struct {
+    int roll_no;
+    char name[20];
+    float s1marks;
+    float s2marks;
+    float s3marks;
+    float marks;
+    float avg;
+} Student;
+
+Student students[MAX_STUDENTS];
+int studentcount = 0;
+
+void createstudent();
+void displaystudent();
+void searchstudent();
+void sortstudent();
+
+int main() {
+    int choice;
+    while (1) {
+        printf("\nStudent Database Management System\n");
+        printf("1. Create Student Entry\n");
+        printf("2. Display Student Entry\n");
+        printf("3. Search Student Entry\n");
+        printf("4. Sort Student Entry\n");
+        printf("5. Exit\n");
+        printf("Enter your Choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1: createstudent(); break;
+            case 2: displaystudent(); break;
+            case 3: searchstudent(); break;
+            case 4: sortstudent(); break;
+            case 5: exit(0);
+            default: printf("Invalid Choice\n");
+        }
+    }
+    return 0;
+}
+
+void createstudent() {
+    if (studentcount >= MAX_STUDENTS) {
+        printf("Student Database is Full\n");
+        return;
+    }
+
+    Student s;
+    printf("Enter Roll No.: ");
+    scanf("%d", &s.roll_no);
+    printf("Enter Name: ");
+    scanf("%s", s.name);
+    printf("Enter Subject 1 Marks: ");
+    scanf("%f", &s.s1marks);
+    printf("Enter Subject 2 Marks: ");
+    scanf("%f", &s.s2marks);
+    printf("Enter Subject 3 Marks: ");
+    scanf("%f", &s.s3marks);
+
+    s.marks = s.s1marks + s.s2marks + s.s3marks;
+    s.avg = s.marks / 3;
+
+    students[studentcount++] = s;
+    printf("Student Entry is Successful\n");
+}
+
+void displaystudent() {
+    if (studentcount == 0) {
+        printf("No Student to Display\n");
+        return;
+    }
+
+    printf("\nStudent List:\n");
+    for (int i = 0; i < studentcount; i++) {
+        printf("Roll No: %d, Name: %s, Total Marks: %f, Average: %f\n",
+            students[i].roll_no, students[i].name,
+            students[i].marks, students[i].avg);
+    }
+}
+
+void searchstudent() {
+    int roll_no, found = 0;
+    printf("Enter Roll No. to be Searched: ");
+    scanf("%d", &roll_no);
+
+    for (int i = 0; i < studentcount; i++) {
+        if (students[i].roll_no == roll_no) {
+            found = 1;
+            printf("Student Entry Found:\n");
+            printf("Roll No: %d, Name: %s, Total Marks: %f, Average: %f\n",
+                   students[i].roll_no, students[i].name,
+                   students[i].marks, students[i].avg);
+            break;
+        }
+    }
+
+    if (!found) {
+        printf("Student Entry with Roll No %d not found\n", roll_no);
+    }
+}
+
+void sortstudent() {
+    for (int i = 0; i < studentcount - 1; i++) {
+        for (int j = 0; j < studentcount - i - 1; j++) {
+            if (students[j].roll_no > students[j + 1].roll_no) {
+                Student temp = students[j];
+                students[j] = students[j + 1];
+                students[j + 1] = temp;
+            }
+        }
+    }
+    printf("Students sorted successfully by Roll No.\n");
+}
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Code Compilation and Testing
+Overall result: SUCCESS — the program compiled and passed the test run.
+Compiler: GCC, C11 standard, with -Wall -Wextra
+Compiler warnings: None
+Test cases
+•	PASS — create student entries
+•	PASS — display records
+•	PASS — find existing roll number
+•	PASS — report missing roll number
+•	PASS — sort by roll number
+•	PASS — sorted order (10 before 20)
+Sample test run output
+Student Database Management System
+1. Create Student Entry
+2. Display Student Entry
+3. Search Student Entry
+4. Sort Student Entry
+5. Exit
+Enter your Choice: Enter Roll No.: Enter Name: Enter Subject 1 Marks: Enter Subject 2 Marks: Enter Subject 3 Marks: Student Entry is Successful
+
+Student Database Management System
+1. Create Student Entry
+2. Display Student Entry
+3. Search Student Entry
+4. Sort Student Entry
+5. Exit
+Enter your Choice: Enter Roll No.: Enter Name: Enter Subject 1 Marks: Enter Subject 2 Marks: Enter Subject 3 Marks: Student Entry is Successful
+
+Student Database Management System
+1. Create Student Entry
+2. Display Student Entry
+3. Search Student Entry
+4. Sort Student Entry
+5. Exit
+Enter your Choice: 
+Student List:
+Roll No: 20, Name: Riya, Total Marks: 255.000000, Average: 85.000000
+Roll No: 10, Name: Asha, Total Marks: 225.000000, Average: 75.000000
+
+Student Database Management System
+1. Create Student Entry
+2. Display Student Entry
+3. Search Student Entry
+4. Sort Student Entry
+5. Exit
+Enter your Choice: Enter Roll No. to be Searched: Student Entry Found:
+Roll No: 20, Name: Riya, Total Marks: 255.000000, Average: 85.000000
+
+Student Database Management System
+1. Create Student Entry
+2. Display Student Entry
+3. Search Student Entry
+4. Sort Student Entry
+5. Exit
+Enter your Choice: Enter Roll No. to be Searched: Student Entry with Roll No 99 not found
+
+Student Database Management System
+1. Create Student Entry
+2. Display Student Entry
+3. Search Student Entry
+4. Sort Student Entry
+5. Exit
+Enter your Choice: Students sorted successfully by Roll No.
+
+Student Database Management System
+1. Create Student Entry
+2. Display Student Entry
+3. Search Student Entry
+4. Sort Student Entry
+5. Exit
+Enter your Choice: 
+Student List:
+Roll No: 10, Name: Asha, Total Marks: 225.000000, Average: 75.000000
+Roll No: 20, Name: Riya, Total Marks: 255.000000, Average: 85.000000
+
+Student Database Management System
+1. Create Student Entry
+2. Display Student Entry
+3. Search Student Entry
+4. Sort Student Entry
+5. Exit
+Enter your Choice:
+Important note
+The program stores up to 10 student records in an array. Names are read with scanf("%s", ...), so the current program accepts a single-word name only. The name array has 20 characters; for safer input, limit the input width to 19 characters (for example, scanf("%19s", s.name)). This note does not change the original program code.

@@ -1,0 +1,115 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define size 10
+
+void push(int);
+void pop();
+void display();
+
+int stack[size], top = -1;
+
+int main() {
+    int value, choice;
+
+    while (1) {
+        printf("\n 1. Push \n 2. Pop \n 3. Display \n 4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter the value to be Inserted: ");
+                scanf("%d", &value);
+                push(value);
+                break;
+
+            case 2:
+                pop();
+                break;
+
+            case 3:
+                display();
+                break;
+
+            case 4:
+                exit(0);
+                break;
+
+            default:
+                printf("Wrong Choice selected");
+        }
+    }
+}
+
+void push(int value) {
+    if (top == size - 1) {
+        printf("Stack is Full");
+    } else {
+        top++;
+        stack[top] = value;
+        printf("Insertion is Successful");
+    }
+}
+
+void pop() {
+    if (top == -1) {
+        printf("Stack is Empty");
+    } else {
+        printf("Item deleted: %d", stack[top]);
+        top--;
+    }
+}
+
+void display() {
+    if (top == -1) {
+        printf("Stack is empty");
+    } else {
+        int i;
+        printf("Stack elements are: ");
+        for (i = top; i >= 0; i--) {
+            printf("%d ", stack[i]);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+Compilation and Execution Verification
+Overall result: SUCCESS — the program compiled and passed the test run.
+Compiler: GCC using the C11 standard with -Wall -Wextra.
+Compiler warnings: None
+Test cases
+•	PASS — push inserts an item
+•	PASS — display lists stack top-to-bottom
+•	PASS — pop removes the top item
+•	PASS — empty-stack condition
+•	PASS — full-stack condition
+Notes
+The program implements a stack using an array of 10 integers. It supports Push, Pop, Display, and Exit operations. A stack follows LIFO (Last In, First Out): the most recently pushed item is removed first.
+The original code does not check whether scanf successfully reads valid input. For normal integer inputs, the tested stack operations work correctly.

@@ -1,0 +1,128 @@
+#include <stdio.h>
+ 
+int main() {
+    int arr[10] = {1, 2, 3, 9, 11, 13, 17, 25, 57, 90};
+    int num, choice;
+ 
+    printf("Choose Search Method:\n");
+    printf("1. Linear Search\n");
+    printf("2. Binary Search\n");
+    printf("Enter your choice (1 or 2): ");
+    scanf("%d", &choice);
+ 
+    printf("Enter the number to be searched: ");
+    scanf("%d", &num);
+ 
+    switch (choice) {
+        case 1: {
+            int i;
+            for (i = 0; i < 10; i++) {
+                if (arr[i] == num)
+                    break;
+            }
+ 
+            if (i == 10)
+                printf("Element not found\n");
+            else
+                printf("Element found at index %d\n", i);
+            break;
+        }
+ 
+        case 2: {
+            int lower = 0, upper = 9, mid;
+            int flag = 0;
+ 
+            while (lower <= upper) {
+                mid = (lower + upper) / 2;
+                if (arr[mid] == num) {
+                    printf("Element found at index %d\n", mid);
+                    flag = 1;
+                    break;
+                } else if (arr[mid] > num) {
+                    upper = mid - 1;
+                } else {
+                    lower = mid + 1;
+                }
+            }
+ 
+            if (!flag)
+                printf("Element not found\n");
+            break;
+        }
+ 
+        default:
+            printf("Invalid choice! Please select either 1 or 2.\n");
+    }
+ 
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Code Verification
+Compilation: SUCCESS (GCC, C11 standard, with -Wall -Wextra -pedantic; no compiler warnings).
+The program was run with the following test inputs:
+•	Linear search: existing value — exit code 0
+
+Choose Search Method:
+1. Linear Search
+2. Binary Search
+Enter your choice (1 or 2): Enter the number to be searched: Element found at index 5
+•	Linear search: missing value — exit code 0
+
+Choose Search Method:
+1. Linear Search
+2. Binary Search
+Enter your choice (1 or 2): Enter the number to be searched: Element not found
+•	Binary search: existing value — exit code 0
+
+Choose Search Method:
+1. Linear Search
+2. Binary Search
+Enter your choice (1 or 2): Enter the number to be searched: Element found at index 8
+•	Binary search: missing value — exit code 0
+
+Choose Search Method:
+1. Linear Search
+2. Binary Search
+Enter your choice (1 or 2): Enter the number to be searched: Element not found
+•	Invalid menu choice — exit code 0
+
+Choose Search Method:
+1. Linear Search
+2. Binary Search
+Enter your choice (1 or 2): Enter the number to be searched: Invalid choice! Please select either 1 or 2.
+Notes
+The array is already sorted in ascending order, which is required for Binary Search.
+Both search methods report the zero-based index of a found element.
+The program assumes that the user enters valid integer input.

@@ -1,0 +1,201 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int data;
+    struct node* next;
+};
+
+struct node* front = NULL;
+struct node* rear = NULL;
+
+void enqueue(int n);
+void dequeue();
+void display();
+
+int main() {
+    int value, choice;
+
+    while (1) {
+        printf("\n 1. Enqueue \n 2. Dequeue \n 3. Display \n 4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter the value to be inserted: ");
+                scanf("%d", &value);
+                enqueue(value);
+                break;
+
+            case 2:
+                dequeue();
+                break;
+
+            case 3:
+                display();
+                break;
+
+            case 4:
+                exit(0);
+
+            default:
+                printf("Wrong Choice\n");
+        }
+    }
+}
+
+void enqueue(int value) {
+    struct node* temp = (struct node*)malloc(sizeof(struct node));
+    if (temp == NULL) {
+        printf("Memory allocation failed\n");
+        return;
+    }
+
+    temp->data = value;
+    temp->next = NULL;
+
+    if (rear == NULL) {
+        front = rear = temp;
+    } else {
+        rear->next = temp;
+        rear = temp;
+    }
+
+    printf("Insertion is successful\n");
+}
+
+void dequeue() {
+    if (front == NULL) {
+        printf("Queue is empty\n");
+        return;
+    }
+
+    struct node* temp = front;
+    printf("Item deleted: %d\n", temp->data);
+    front = front->next;
+
+    if (front == NULL) {
+        rear = NULL;
+    }
+
+    free(temp);
+}
+
+void display() {
+    if (front == NULL) {
+        printf("Queue is empty\n");
+        return;
+    }
+
+    struct node* temp = front;
+    printf("Queue elements are: ");
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+}
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Compilation and Execution Verification
+Overall result: SUCCESS — the program compiled and passed the test run.
+Compiler: GCC with C11 standard, -Wall and -Wextra.
+Compiler warnings: None
+Test results
+•	PASS — enqueue inserts values
+•	PASS — display shows FIFO order
+•	PASS — dequeue removes first inserted item
+•	PASS — remaining queue displays second item
+•	PASS — empty queue condition
+Sample execution output
+1. Enqueue 
+ 2. Dequeue 
+ 3. Display 
+ 4. Exit
+Enter your choice: Enter the value to be inserted: Insertion is successful
+
+ 1. Enqueue 
+ 2. Dequeue 
+ 3. Display 
+ 4. Exit
+Enter your choice: Enter the value to be inserted: Insertion is successful
+
+ 1. Enqueue 
+ 2. Dequeue 
+ 3. Display 
+ 4. Exit
+Enter your choice: Queue elements are: 10 20 
+
+ 1. Enqueue 
+ 2. Dequeue 
+ 3. Display 
+ 4. Exit
+Enter your choice: Item deleted: 10
+
+ 1. Enqueue 
+ 2. Dequeue 
+ 3. Display 
+ 4. Exit
+Enter your choice: Queue elements are: 20 
+
+ 1. Enqueue 
+ 2. Dequeue 
+ 3. Display 
+ 4. Exit
+Enter your choice: Item deleted: 20
+
+ 1. Enqueue 
+ 2. Dequeue 
+ 3. Display 
+ 4. Exit
+Enter your choice: Queue is empty
+
+ 1. Enqueue 
+ 2. Dequeue 
+ 3. Display 
+ 4. Exit
+Enter your choice:
+Notes
+This program implements a queue using a singly linked list. Enqueue adds an item at the rear, dequeue removes an item from the front, and display prints the queue from front to rear. A queue follows FIFO (First In, First Out).
+The program allocates memory dynamically for each inserted node and frees the node when it is removed. The original input statements do not validate whether scanf successfully reads an integer; the test used valid integer input.

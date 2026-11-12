@@ -1,0 +1,141 @@
+
+#include <stdio.h>
+
+int main()
+{
+    int arr[10], num, i, j, temp, min, key, choice;
+
+    printf("Enter how many elements (1 to 10): ");
+    if (scanf("%d", &num) != 1 || num <= 0 || num > 10) {
+        printf("Invalid number of elements.\n");
+        return 1;
+    }
+
+    printf("Enter %d elements:\n", num);
+    for (i = 0; i < num; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Original elements:\n");
+    for (i = 0; i < num; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
+    printf("\nChoose sorting method:\n");
+    printf("1. Bubble Sort\n");
+    printf("2. Selection Sort\n");
+    printf("3. Insertion Sort\n");
+    printf("Enter your choice (1-3): ");
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1: // Bubble Sort
+            for (i = 0; i < num - 1; i++) {
+                int swapped = 0;
+                for (j = 0; j < num - i - 1; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                        swapped = 1;
+                    }
+                }
+                if (!swapped) break;
+            }
+            break;
+
+        case 2: // Selection Sort
+            for (i = 0; i < num - 1; i++) {
+                min = i;
+                for (j = i + 1; j < num; j++) {
+                    if (arr[j] < arr[min]) {
+                        min = j;
+                    }
+                }
+                if (min != i) {
+                    temp = arr[i];
+                    arr[i] = arr[min];
+                    arr[min] = temp;
+                }
+            }
+            break;
+
+        case 3: // Insertion Sort
+            for (i = 1; i < num; i++) {
+                key = arr[i];
+                j = i - 1;
+                while (j >= 0 && arr[j] > key) {
+                    arr[j + 1] = arr[j];
+                    j--;
+                }
+                arr[j + 1] = key;
+            }
+            break;
+
+        default:
+            printf("Invalid choice.\n");
+            return 1;
+    }
+
+    printf("\nSorted elements:\n");
+    for (i = 0; i < num; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Compilation and Execution Verification
+Overall result: SUCCESS — the program compiled and all test cases passed.
+Compiler: GCC with C11 standard, -Wall and -Wextra.
+Compiler warnings: None
+Test results
+•	PASS — Bubble Sort
+•	PASS — Selection Sort
+•	PASS — Insertion Sort
+•	PASS — invalid element count is rejected
+•	PASS — invalid sorting choice is rejected
+Example output (Bubble Sort)
+Enter how many elements (1 to 10): Enter 5 elements:
+Original elements:
+64 25 12 22 11 
+
+Choose sorting method:
+1. Bubble Sort
+2. Selection Sort
+3. Insertion Sort
+Enter your choice (1-3): 
+Sorted elements:
+11 12 22 25 64
+What the program does
+The program accepts between 1 and 10 integers, displays the original list, asks the user to choose one of three sorting methods, and displays the sorted list.
+The original source code is retained in this document. The tests used the same five unsorted values (64, 25, 12, 22, 11) for each sorting method.
